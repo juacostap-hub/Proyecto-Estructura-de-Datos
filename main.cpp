@@ -9,7 +9,7 @@
 #include <string>             // Para usar texto (std::string)
 #include <cstdlib>            // Para exit(), que cierra el programa
 #include <cctype>             // Para toupper(), que convierte una letra a mayúscula
-#include "Proyecto1ED.h"      // Persona 1: Plato, Mesa, Pedidos, ArregloMenu, ArregloMesa, PilaPedidos
+#include "MesasMenu.h"        // Persona 1: Plato, Mesa, Pedidos, ArregloMenu, ArregloMesa, PilaPedidos
 #include "Cliente.h"          // Persona 2: clientes y tipos de tarjeta
 #include "ColaComun.h"        // Persona 2: fila de espera común (cola normal)
 #include "ColaVIP.h"          // Persona 2: fila de espera VIP (cola con prioridad)
