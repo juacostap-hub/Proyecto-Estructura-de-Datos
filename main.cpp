@@ -1,19 +1,15 @@
 // SIMULADOR DE CAFETERÍA - Fase 1
-// Archivo principal: menú e interfaz de consola (Persona 3), donde se unen las partes del grupo:
-//   Persona 1 → arreglos dinámicos (menú y mesas) y pila (comanda de cada mesa)   [Proyecto1ED.h]
-//   Persona 2 → fila de espera común (cola normal) y fila VIP (cola con prioridad) [Cliente.h, ColaComun.h, ColaVIP.h]
-//   Persona 3 → turnos de meseros y domiciliarios (cola circular) y este menú     [ColaCircular.h, GrupoPersonal.h/.cpp]
-
+// Archivo principal: menú e interfaz de consola,
 #include <iostream>           // Para escribir en pantalla (std::cout) y leer del teclado (std::cin)
 #include <iomanip>            // Para dar formato a los números (sin decimales en los precios)
 #include <string>             // Para usar texto (std::string)
 #include <cstdlib>            // Para exit(), que cierra el programa
 #include <cctype>             // Para toupper(), que convierte una letra a mayúscula
-#include "MesasMenu.h"        // Persona 1: Plato, Mesa, Pedidos, ArregloMenu, ArregloMesa, PilaPedidos
-#include "Cliente.h"          // Persona 2: clientes y tipos de tarjeta
-#include "ColaComun.h"        // Persona 2: fila de espera común (cola normal)
-#include "ColaVIP.h"          // Persona 2: fila de espera VIP (cola con prioridad)
-#include "GrupoPersonal.h"    // Persona 3: grupos de meseros y domiciliarios (cola circular)
+#include "MesasMenu.h"        // Plato, Mesa, Pedidos, ArregloMenu, ArregloMesa, PilaPedidos
+#include "Cliente.h"          // clientes y tipos de tarjeta
+#include "ColaComun.h"        // fila de espera común (cola normal)
+#include "ColaVIP.h"          // fila de espera VIP (cola con prioridad)
+#include "GrupoPersonal.h"    // grupos de meseros y domiciliarios (cola circular)
 
 #ifdef _WIN32                 // Esta parte solo se usa si el programa se compila en Windows
 #include <windows.h>          // Para poder mostrar bien las tildes y la ñ en la consola de Windows
@@ -28,7 +24,7 @@ const int MAX_MESAS = 20;     // Cantidad máxima de mesas (cada mesa tiene su p
 // Datos del programa, agrupados para pasarlos juntos a las funciones
 // ---------------------------------------------------------------
 
-struct FilasEspera {          // Filas de espera de clientes (Persona 2)
+struct FilasEspera {          // Filas de espera de clientes 
     Cola comun;               // Fila común (cola normal): clientes sin tarjeta
     ColaPrioridad vip;        // Fila VIP (cola con prioridad): clientes con tarjeta
     int turno;                // Número de turno que se le dará al próximo cliente que llegue
@@ -112,7 +108,7 @@ string mayusculas(string texto) {                  // Convierte un texto a mayú
 
 
 // ---------------------------------------------------------------
-// Meseros y domiciliarios (Persona 3: colas circulares)
+// Meseros y domiciliarios (Colas circulares)
 // ---------------------------------------------------------------
 
 void asignarEmpleado(GrupoPersonal& grupo) {       // Asigna al siguiente empleado libre del grupo y muestra el resultado
@@ -168,7 +164,7 @@ void menuGrupo(GrupoPersonal& grupo) {             // Submenú para administrar 
 
 
 // ---------------------------------------------------------------
-// Menú de productos y mesas (Persona 1: arreglos dinámicos)
+// Menú de productos y mesas (arreglos dinámicos)
 // ---------------------------------------------------------------
 
 void mostrarMenuProductos(Restaurante& r) {        // Muestra todos los platos del menú
@@ -287,7 +283,7 @@ void menuMesas(Restaurante& r) {                   // Submenú para administrar 
 
 
 // ---------------------------------------------------------------
-// Salón: fila de espera (Persona 2), mesas y comandas (Persona 1), meseros (Persona 3)
+// Salón: fila de espera, mesas y comandas , meseros
 // ---------------------------------------------------------------
 
 int capacidadMaxima(Restaurante& r) {              // Devuelve la capacidad de la mesa más grande
@@ -484,13 +480,13 @@ void menuSalon(GrupoPersonal& meseros, FilasEspera& filas, Restaurante& r) {    
         cout << "0. Volver\n";
         opcion = leerEntero("Opción: ");
         switch (opcion) {
-            case 1: registrarCliente(filas, r, false); break;   // Persona 2: cola normal
-            case 2: registrarCliente(filas, r, true); break;    // Persona 2: cola con prioridad
-            case 3: llamarSiguiente(filas, r, meseros); break;  // Personas 1, 2 y 3 trabajando juntas
+            case 1: registrarCliente(filas, r, false); break;   // cola normal
+            case 2: registrarCliente(filas, r, true); break;    // cola con prioridad
+            case 3: llamarSiguiente(filas, r, meseros); break;  
             case 4: verFilas(filas); break;
             case 5: mostrarMesas(r); break;
-            case 6: tomarComanda(r); break;                     // Persona 1: pila
-            case 7: deshacerProducto(r); break;                 // Persona 1: pila
+            case 6: tomarComanda(r); break;                     // pila
+            case 7: deshacerProducto(r); break;                 // pila
             case 8: cerrarCuenta(r, meseros); break;
             case 0: break;
             default: cout << "Opción no válida.\n";
@@ -500,7 +496,7 @@ void menuSalon(GrupoPersonal& meseros, FilasEspera& filas, Restaurante& r) {    
 
 
 // ---------------------------------------------------------------
-// Domicilios (pila de la Persona 1 + cola circular de domiciliarios de la Persona 3)
+// Domicilios (pila  + cola circular de domiciliarios)
 // ---------------------------------------------------------------
 
 void agregarProductoDomicilio(Restaurante& r) {    // Agrega un producto al pedido a domicilio que se está tomando
@@ -590,10 +586,10 @@ void menuAdministracion(GrupoPersonal& meseros, GrupoPersonal& domiciliarios, Re
         cout << "0. Volver\n";
         opcion = leerEntero("Opción: ");
         switch (opcion) {
-            case 1: menuGrupo(meseros); break;                  // Persona 3: administrar meseros
-            case 2: menuGrupo(domiciliarios); break;            // Persona 3: administrar domiciliarios
-            case 3: menuProductos(r); break;                    // Persona 1: arreglo dinámico del menú
-            case 4: menuMesas(r); break;                        // Persona 1: arreglo dinámico de mesas
+            case 1: menuGrupo(meseros); break;                  // administrar meseros
+            case 2: menuGrupo(domiciliarios); break;            // administrar domiciliarios
+            case 3: menuProductos(r); break;                    // arreglo dinámico del menú
+            case 4: menuMesas(r); break;                        // arreglo dinámico de mesas
             case 0: break;
             default: cout << "Opción no válida.\n";
         }
@@ -630,7 +626,7 @@ int main() {
     rest.menu.agregar(Plato(104, "Helado de Vainilla", 5000));
     rest.siguienteIdPlato = 105;               // El próximo plato nuevo será el 105
 
-    rest.mesas.agregar(Mesa(1, 2));            // Mesas iniciales (las de la Persona 1)
+    rest.mesas.agregar(Mesa(1, 2));            // Mesas iniciales 
     rest.mesas.agregar(Mesa(2, 4));
     rest.mesas.agregar(Mesa(3, 6));
     rest.siguienteIdMesa = 4;                  // La próxima mesa nueva será la 4
