@@ -53,6 +53,18 @@ class Cola{
       return true;
     };
 
+    bool obtenerEn( int pos, Cliente & c ){         // AGREGADO para la interfaz gráfica: copia al cliente de la posición pos (0 = el primero) sin sacarlo de la fila
+      NodoCola * aux = cabeza;                      // Empieza en el primer nodo
+      int k = 0;                                    // Posición actual
+      while(aux!=NULL && k<pos){                    // Avanza hasta la posición pedida
+        aux = aux->sig;                             // Siguiente nodo
+        k++;                                        // Una posición más
+      };
+      if(aux==NULL) return false;                   // La posición no existe
+      c = aux->dato;                                // Copia el cliente
+      return true;
+    };
+
     bool esvacia(){                       // Dice si la fila está vacía o no
       return cabeza==NULL;                // Vacía → no existe primer nodo
     };

@@ -33,6 +33,7 @@ class GrupoPersonal {
     int cantidadLibres() const;                            // Cuántos empleados están libres ahora
     const std::string& getTipo() const { return tipo; }        // Devuelve el cargo en singular
     const std::string& getPlural() const { return plural; }    // Devuelve el cargo en plural
+    const ColaCircular& getCola() const { return cola; }       // AGREGADO para la interfaz gráfica: permite consultar la cola circular (sin modificarla)
 };
 
 #endif                    // Fin de la protección contra lecturas repetidas

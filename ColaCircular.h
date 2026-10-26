@@ -43,6 +43,9 @@ class ColaCircular {
     bool estaLlena() const { return cantidad == capacidad; }   // Dice si ya no cabe ningún elemento más
     int tamano() const { return cantidad; }                    // Devuelve cuántos elementos hay ahora
     int getCapacidad() const { return capacidad; }             // Devuelve el tamaño máximo de la cola
+    int getFrente() const { return frente; }                   // AGREGADO para la interfaz gráfica: posición del arreglo donde está el frente
+    int getFinal() const { return final; }                     // AGREGADO para la interfaz gráfica: posición del arreglo donde entrará el próximo
+    const Empleado& ranura(int k) const { return datos[k]; }   // AGREGADO para la interfaz gráfica: contenido de la posición k del arreglo (sin importar el turno)
 
     bool encolar(const Empleado& e) {       // Agrega un empleado al final de la cola
         if (estaLlena()) return false;      // Retorna false si no hay espacio

@@ -1,49 +1,39 @@
-Sistema de Gestión de Restaurante
+# Simulador de Cafetería (Estructuras de Datos, C++)
 
-Este proyecto consiste en un sistema de gestión integral para restaurantes desarrollado en C++. El sistema permite la administración del menú, la asignación de mesas, la toma y modificación de comandas/pedidos, la organización de listas de espera de clientes y el control de turnos de personal.
+Simulador de una cafetería con salón y domicilios. Las estructuras de datos están programadas a mano:
 
+| Estructura | Dónde se usa | Archivo |
+|---|---|---|
+| Arreglos dinámicos | Menú y mesas | `Proyecto1ED.h` |
+| Pila | Comanda de cada mesa y del domicilio | `Proyecto1ED.h` |
+| Cola normal | Fila de espera común | `ColaComun.h` |
+| Cola con prioridad | Fila VIP | `ColaVIP.h` |
+| Cola circular | Turnos de meseros y domiciliarios | `ColaCircular.h`, `GrupoPersonal.*` |
 
+## Cómo compilar
 
-A continuación, se enuncia el paso a paso para descargar y ejecutar el programa correctamente en el dispositivo de destino:
+Windows (PowerShell, con g++ de MinGW o MSYS2):
 
+    g++ -std=c++17 -o proyecto *.cpp -lws2_32
 
-1. Abrir la consola de comandos: Desde aquí se descargará y ejecutará el programa.
+Mac, Linux o Colab:
 
+    g++ -std=c++17 -o proyecto *.cpp
 
-2. Clonar el repositorio desde GitHub: Escribir el siguiente comando en la consola: 
+## Cómo ejecutar
 
-git clone https://github.com/juacostap-hub/Proyecto-Estructura-de-Datos
+| Comando | Qué abre |
+|---|---|
+| `.\proyecto` (Windows) o `./proyecto` | **Interfaz gráfica**: se abre sola en el navegador (http://localhost:8080) |
+| `proyecto consola` | Interfaz de consola (menús numerados) |
+| `proyecto < entrada.txt` | Consola con las respuestas leídas de un archivo (Colab, pruebas) |
 
+La interfaz gráfica es una página que muestra el estado del programa. **Toda la lógica y las estructuras están en C++**:
+el programa abre un servidor local (`Servidor.cpp`, hecho con los sockets del sistema, sin librerías externas) y cada botón llama a una operación de `Cafeteria.cpp`.
 
-3. Acceder al directorio del proyecto: Escribir el siguiente comando en la consola: 
+## Archivos
 
-cd Proyecto-Estructura-de-Datos
+- `main.cpp`: elige la interfaz. `Consola.cpp`: interfaz de consola. `Servidor.cpp` y `Pagina.h`: interfaz gráfica.
+- `Cafeteria.h/.cpp`: operaciones de la interfaz gráfica. `Estado.h`: datos y reglas compartidas.
 
-
-4. Compilar el código fuente: Escribir el siguiente comando en la consola: 
-
-g++ -std=c++17 main.cpp GrupoPersonal.cpp -o restaurante
-
-
-5. Ejecutar la aplicación: Por último, falta escribir el siguiente comando en la consola para ejecutar el programa: 
-
-Linux / macOS:
-
-./restaurante
-
-Windows:
-
-restaurante.exe
-
-
-Nota: En caso de ejecutar el programa en Google Colab, se debe seguir el mismo paso a paso, con los mismos comandos de Linux, pero añadiendo un signo de admiración (!) al principio de cada uno (excepto en el paso 3, en ese caso se debe añadir signo de porcentaje (%) al principio).
-
-
-
-DESARROLLADO POR:
-
-Julian Felipe Acosta Pineda
-
-Lizeth Mariana Rubiano Torres
-
-Andres Julian Sanchez Escobar
+No se usa ninguna librería externa: la única parte de la librería estándar que se usa es `string` (y flujos de texto) para el texto.
