@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Cliente.h"      // Es necesario porque se usa Cliente, definido en Cliente.h
-#include "colaComun.h"    // Es necesario porque cada nivel de la fila VIP es una Cola, definida en colaComun.h
+#include "ColaComun.h"    // Es necesario porque cada nivel de la fila VIP es una Cola, definida en colaComun.h
  
  
 // Cola con prioridad para la fila de espera VIP
